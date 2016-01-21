@@ -1,7 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var sightingCtrl = require('./controllers/sightingCtrl');
+var sightingCtrl = require('./controllers/sightingCtrl'); //instead of passing in the entire exports object from sightingCtrl wouldn't it be more efficient to just bring only the method that is needed?
+                                                          //i.e. app.post would match directly to only sightingCtrl.create. This would hypothetical make the app architecture more efficient,
+                                                          //streamlined, & increase performance. Architectural improvements to increase app performance.
 
 var app = express();
 app.use(bodyParser.json());
