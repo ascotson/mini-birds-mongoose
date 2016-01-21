@@ -6,10 +6,12 @@ module.exports = {
     newSighting.save(req.body, function(err, result) {  //.save is a method (with a ton of others) on the new object created by the Sighting constructor method. It takes in req.body and the anonymous function as parameters.
       if(err) {  //when we say new Sighting it is only referencing the constructor method on the Sighting Model - there are a ton of properties on the Model. We dont have to type 'new Sighting.methodnamme(req.body) because mongoose intelligently eliminates the need for that with the code built into Model.'
         res.status(500).send('Failed to add new record'); //IT IS ESSENTIAL TO COMPLETELY UNDERSTAND THE CODE BEHIND FRAMEWORKS & LIBRARIES LIKE MONGOOSE & EXPRESS SO YOU CAN AVOID SCOPE ISSUES (& JUST SIMPLY UNDERSTAND WHAT'S GOING ON & THE BENEFIT/EASE THE FW/LIB IS PROVIDING YOU).
-        console.log('POST request failed');
+        console.log(err, 'POST request failed');
       }
-      res.send(result);
-      console.log('POST success');
+      else {
+        res.send(result);
+        console.log('POST success');
+      }
     });
   },
 
@@ -17,10 +19,12 @@ module.exports = {
     Sighting.find({}, function(err, result) { //.find is another method on the new object created by the Sighting constructor method on the Model object named Sighting).
       if(err) {
         res.status(500).send('Failed to get requested record');
-        console.log('GET request failed');
+        console.log(err, 'GET request failed');
       }
-      res.send(result);
-      console.log('GET success');
+      else {
+        res.send(result);
+        console.log('POST success');
+      }
     });
   },
 
@@ -28,10 +32,12 @@ module.exports = {
     Sighting.findByIdAndUpdate(req.params.id, req.body, function(err, result) {
       if(err) {
         res.status(500).send('Failed to update requested record');
-        console.log('PUT request failed');
+        console.log(err, 'PUT request failed');
       }
-      res.send(result);
-      console.log('PUT success');
+      else {
+        res.send(result);
+        console.log('POST success');
+      }
     });
   },
 
@@ -39,10 +45,12 @@ module.exports = {
     Sighting.findByIdAndRemove(req.params.id, function(err, result) {
       if(err) {
         res.status(500).send('Failed to delete requested record');
-        console.log('DELETE request failed');
+        console.log(err, 'DELETE request failed');
       }
-      res.send(result);
-      console.log('DELETE success');
+      else {
+        res.send(result);
+        console.log('POST success');
+      }
     });
   }
 };

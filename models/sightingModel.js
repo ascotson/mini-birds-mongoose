@@ -5,7 +5,7 @@ var userSchema = require('./../schemas/userSchema');
 var Schema = mongoose.Schema;
 
 var sightingSchema = new Schema({
-  user: {type: Schema.Types.ObjectId, ref: 'user'}, //utilizing a 'referential' relationship that permits all historical and new data to be referenced to the user regardless of if the user object is altered or updated. i.e.  if a user was to update their email address all previous sighting data will now refer to the updated user object that includes the new address.
+  user: {type: Schema.Types.ObjectId, ref: 'userSchema'}, //utilizing a 'referential' relationship that permits all historical and new data to be referenced to the user regardless of if the user object is altered or updated. i.e.  if a user was to update their email address all previous sighting data will now refer to the updated user object that includes the new address.
   bird: [birdSchema], //Using an 'embedded' relationship to store bird data for a given sighting embeds all historical data into this current data request. i.e. all data from previous sightings is included in this new sighting which allows for comparison purposes.
   //nesting the birdSchema inside the new sightingSchema & ensuring that all bird data on this new Schema is in conformity with the currently existing birdSchema. This ensures uniformity in how all bird data is stored in the database by passing ALL bird data through the birdSchema. We would instantiate birdSchema in ALL Models working with bird data.
   confirmed: {type: Boolean, default: false,
